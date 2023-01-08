@@ -1,8 +1,6 @@
 package com.mono.bookingsystem.ticketsystem.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Ticket {
@@ -12,6 +10,7 @@ public class Ticket {
     private Long id;
     private String fullName;
     private Long tripId;
+
     private Long paymentId;
 
     public Ticket() {}
