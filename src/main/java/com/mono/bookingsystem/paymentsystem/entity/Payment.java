@@ -12,12 +12,19 @@ public class Payment {
     private Long id;
     private String fullName;
     private Double amount;
+    private Status status = Status.NEW;
 
     public Payment() {}
 
     public Payment(String fullName, Double amount) {
         this.fullName = fullName;
         this.amount = amount;
+    }
+
+    public Payment(String fullName, Double amount, Status status) {
+        this.fullName = fullName;
+        this.amount = amount;
+        this.status = status;
     }
 
     public Long getId() {
@@ -44,6 +51,14 @@ public class Payment {
         this.amount = amount;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,6 +83,7 @@ public class Payment {
                 "id=" + id +
                 ", fullName='" + fullName + '\'' +
                 ", amount=" + amount +
+                ", status=" + status +
                 '}';
     }
 }

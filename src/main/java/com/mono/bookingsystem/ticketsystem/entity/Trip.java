@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 public class Trip {
@@ -12,19 +12,19 @@ public class Trip {
     @Id
     @GeneratedValue
     private Long id;
-    private String from;
-    private String to;
-    private Date date;
+    private String fromPlace; // "Place" post-fixed in here because of reserved SQL keyword "from"
+    private String toPlace;
+    private LocalDateTime date;
     private Double price;
     private Integer available;
 
-    public Trip(String from,
-                String to,
-                Date date,
+    public Trip(String fromPlace,
+                String toPlace,
+                LocalDateTime date,
                 Double price,
                 Integer available) {
-        this.from = from;
-        this.to = to;
+        this.fromPlace = fromPlace;
+        this.toPlace = toPlace;
         this.date = date;
         this.price = price;
         this.available = available;
@@ -40,27 +40,27 @@ public class Trip {
         this.id = id;
     }
 
-    public String getFrom() {
-        return from;
+    public String getFromPlace() {
+        return fromPlace;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setFromPlace(String from) {
+        this.fromPlace = from;
     }
 
-    public String getTo() {
-        return to;
+    public String getToPlace() {
+        return toPlace;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setToPlace(String to) {
+        this.toPlace = to;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -86,8 +86,8 @@ public class Trip {
         if (!(o instanceof Trip trip)) return false;
 
         if (!getId().equals(trip.getId())) return false;
-        if (!getFrom().equals(trip.getFrom())) return false;
-        if (!getTo().equals(trip.getTo())) return false;
+        if (!getFromPlace().equals(trip.getFromPlace())) return false;
+        if (!getToPlace().equals(trip.getToPlace())) return false;
         if (!getDate().equals(trip.getDate())) return false;
         if (!getPrice().equals(trip.getPrice())) return false;
         return getAvailable().equals(trip.getAvailable());
@@ -96,8 +96,8 @@ public class Trip {
     @Override
     public int hashCode() {
         int result = getId().hashCode();
-        result = 31 * result + getFrom().hashCode();
-        result = 31 * result + getTo().hashCode();
+        result = 31 * result + getFromPlace().hashCode();
+        result = 31 * result + getToPlace().hashCode();
         result = 31 * result + getDate().hashCode();
         result = 31 * result + getPrice().hashCode();
         result = 31 * result + getAvailable().hashCode();
@@ -108,8 +108,8 @@ public class Trip {
     public String toString() {
         return "Trip{" +
                 "id=" + id +
-                ", from='" + from + '\'' +
-                ", to='" + to + '\'' +
+                ", from='" + fromPlace + '\'' +
+                ", to='" + toPlace + '\'' +
                 ", date=" + date +
                 ", price=" + price +
                 ", available=" + available +

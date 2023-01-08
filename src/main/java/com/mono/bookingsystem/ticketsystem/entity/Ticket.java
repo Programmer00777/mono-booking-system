@@ -15,6 +15,10 @@ public class Ticket {
 
     public Ticket() {}
 
+    public Ticket(String fullName) {
+        this.fullName = fullName;
+    }
+
     public Ticket(String fullName, Long tripId) {
         this.fullName = fullName;
         this.tripId = tripId;
