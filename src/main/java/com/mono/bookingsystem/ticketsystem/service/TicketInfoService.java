@@ -6,6 +6,7 @@ import com.mono.bookingsystem.ticketsystem.repository.TicketRepository;
 import com.mono.bookingsystem.ticketsystem.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.UUID;
 
@@ -35,9 +36,13 @@ public class TicketInfoService {
         if (ticket == null) {
             throw new TicketNotFoundException("Ticket with ID " + ticketId + " not found");
         } else {
+            String uri = "http://localhost:8080/payment/status/" + ticket.getPaymentId();
+            RestTemplate template = new RestTemplate();
+            String fetchedStatus = template.getForObject(uri, String.class);
+
             String info = "Trip info:\n"
                           + tripRepository.findById(ticket.getTripId())
-                          + "Payment status: ";
+                          + "Payment status: " + fetchedStatus;
 
             // FIXME: how can I fetch the payment status if I want ticket system and payment system
             // FIXME: to communicate through HTTP
