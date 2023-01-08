@@ -12,16 +12,14 @@ public class Ticket {
     private Long id;
     private String fullName;
     private Long tripId;
+    private Long paymentId;
 
     public Ticket() {}
 
-    public Ticket(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public Ticket(String fullName, Long tripId) {
+    public Ticket(String fullName, Long tripId, Long paymentId) {
         this.fullName = fullName;
         this.tripId = tripId;
+        this.paymentId = paymentId;
     }
 
     public Long getId() {
@@ -48,6 +46,14 @@ public class Ticket {
         this.tripId = tripId;
     }
 
+    public Long getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(Long paymentId) {
+        this.paymentId = paymentId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,7 +61,8 @@ public class Ticket {
 
         if (!getId().equals(ticket.getId())) return false;
         if (!getFullName().equals(ticket.getFullName())) return false;
-        return getTripId().equals(ticket.getTripId());
+        if (!getTripId().equals(ticket.getTripId())) return false;
+        return getPaymentId().equals(ticket.getPaymentId());
     }
 
     @Override
@@ -63,6 +70,7 @@ public class Ticket {
         int result = getId().hashCode();
         result = 31 * result + getFullName().hashCode();
         result = 31 * result + getTripId().hashCode();
+        result = 31 * result + getPaymentId().hashCode();
         return result;
     }
 
@@ -72,6 +80,7 @@ public class Ticket {
                 "id=" + id +
                 ", fullName='" + fullName + '\'' +
                 ", tripId=" + tripId +
+                ", paymentId=" + paymentId +
                 '}';
     }
 }

@@ -47,9 +47,9 @@ public class LoadDatabase {
                                      37));
             tripRepository.findAll().forEach(trip -> LOGGER.info("Preloaded " + trip));
 
-            ticketRepository.save(new Ticket("Sergey Chernikov", 1L));
-            ticketRepository.save(new Ticket("John Doe", 2L));
-            ticketRepository.save(new Ticket("Alex Brown", 3L));
+            ticketRepository.save(new Ticket("Sergey Chernikov", 1L, 1L));
+            ticketRepository.save(new Ticket("John Doe", 2L, 2L));
+            ticketRepository.save(new Ticket("Alex Brown", 3L, 3L));
             ticketRepository.findAll().forEach(ticket -> LOGGER.info("Preloaded: " + ticket));
         };
     }
