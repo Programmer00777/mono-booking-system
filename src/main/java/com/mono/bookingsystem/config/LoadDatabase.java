@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 @Configuration
 public class LoadDatabase {
@@ -24,33 +26,34 @@ public class LoadDatabase {
     CommandLineRunner initDatabase(PaymentRepository paymentRepository,
                                    TicketRepository ticketRepository,
                                    TripRepository tripRepository) {
+        Payment payment1 = new Payment("Sergey Chernikov", 600.45, Status.DONE);
+        Payment payment2 = new Payment("John Doe", 400.00, Status.FAILED);
+        Payment payment3 = new Payment("Alex Brown", 500.00);
+
+        Trip trip1 = new Trip("Dnipro", "Kharkiv",
+                LocalDateTime.of(2022, 1, 14, 11, 0, 0),
+                600.45, 40);
+        Trip trip2 = new Trip("Kiyv", "Zhytomyr",
+                LocalDateTime.of(2022, 1, 15, 9, 30, 0),
+                400.0, 31);
+        Trip trip3 = new Trip("Odesa", "Mykolaiv",
+                LocalDateTime.of(2022, 2, 4, 15, 45, 0),
+                500.0, 37);
+
         return args -> {
-            paymentRepository.save(new Payment("Sergey Chernikov", 600.45, Status.DONE));
-            paymentRepository.save(new Payment("John Doe", 400.00, Status.FAILED));
-            paymentRepository.save(new Payment("Alex Brown", 500.00));
-            paymentRepository.findAll().forEach(payment -> LOGGER.info("Preloaded " + payment));
+            paymentRepository.saveAll(Arrays.asList(payment1, payment2, payment3));
+            tripRepository.saveAll(Arrays.asList(trip1, trip2, trip3));
 
-            tripRepository.save(new Trip("Dnipro",
-                                           "Kharkiv",
-                                               LocalDateTime.of(2022, 1, 14, 11, 0, 0),
-                                         600.45,
-                                      40));
-            tripRepository.save(new Trip("Kiyv",
-                                          "Zhytomyr",
-                                              LocalDateTime.of(2022, 1, 15, 9, 30, 0),
-                                        400.00,
-                                     31));
-            tripRepository.save(new Trip("Odesa",
-                                          "Mykolaiv",
-                                              LocalDateTime.of(2022, 2, 4, 15, 45, 0),
-                                        500.00,
-                                     37));
-            tripRepository.findAll().forEach(trip -> LOGGER.info("Preloaded " + trip));
+            Ticket ticket1 = new Ticket("Sergey Chernikov", trip1.getId(), payment1.getId());
+            Ticket ticket2 = new Ticket("John Doe", trip2.getId(), payment2.getId());
+            Ticket ticket3 = new Ticket("Alex Brown", trip3.getId(), payment3.getId());
 
-            ticketRepository.save(new Ticket("Sergey Chernikov", 1L, 1L));
-            ticketRepository.save(new Ticket("John Doe", 2L, 2L));
-            ticketRepository.save(new Ticket("Alex Brown", 3L, 3L));
-            ticketRepository.findAll().forEach(ticket -> LOGGER.info("Preloaded: " + ticket));
+            ticketRepository.saveAll(Arrays.asList(ticket1, ticket2, ticket3));
+
+            Stream.of(paymentRepository, tripRepository, ticketRepository)
+                    .forEach(repo -> {
+                        repo.findAll().forEach(item -> LOGGER.info("Preloaded: " + item));
+                    });
         };
     }
 }

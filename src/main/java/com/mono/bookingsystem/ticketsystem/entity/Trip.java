@@ -5,13 +5,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 public class Trip {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
     private String fromPlace; // "Place" post-fixed in here because of reserved SQL keyword "from"
     private String toPlace;
     private LocalDateTime date;
@@ -32,11 +33,11 @@ public class Trip {
 
     public Trip() {}
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

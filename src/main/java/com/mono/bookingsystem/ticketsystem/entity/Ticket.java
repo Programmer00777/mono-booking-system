@@ -2,30 +2,32 @@ package com.mono.bookingsystem.ticketsystem.entity;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 public class Ticket {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
     private String fullName;
-    private Long tripId;
+    private UUID tripId;
 
-    private Long paymentId;
+    private UUID paymentId;
 
     public Ticket() {}
 
-    public Ticket(String fullName, Long tripId, Long paymentId) {
+    public Ticket(String fullName, UUID tripId, UUID paymentId) {
         this.fullName = fullName;
         this.tripId = tripId;
         this.paymentId = paymentId;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -37,19 +39,19 @@ public class Ticket {
         this.fullName = fullName;
     }
 
-    public Long getTripId() {
+    public UUID getTripId() {
         return tripId;
     }
 
-    public void setTripId(Long tripId) {
+    public void setTripId(UUID tripId) {
         this.tripId = tripId;
     }
 
-    public Long getPaymentId() {
+    public UUID getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(Long paymentId) {
+    public void setPaymentId(UUID paymentId) {
         this.paymentId = paymentId;
     }
 
