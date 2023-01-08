@@ -24,6 +24,12 @@ public class CreatePaymentService {
     }
 
     public UUID createPayment(String fullName, Double amount) {
+        if (fullName == null || amount == null) {
+            throw new IllegalArgumentException("Both fullName and amount must be provided");
+        }
+        if (amount < 0.0) {
+            throw new IllegalArgumentException("The amount cannot be less than 0");
+        }
         Payment payment = new Payment(fullName, amount);
         paymentRepository.save(payment);
         return payment.getId();
