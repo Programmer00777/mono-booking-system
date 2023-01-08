@@ -4,6 +4,7 @@ import com.mono.bookingsystem.paymentsystem.entity.Payment;
 import com.mono.bookingsystem.paymentsystem.entity.Status;
 import com.mono.bookingsystem.paymentsystem.exception.PaymentNotFoundException;
 import com.mono.bookingsystem.paymentsystem.repository.PaymentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -19,6 +20,7 @@ public class FetchPaymentStatusService {
 
     private final PaymentRepository paymentRepository;
 
+    @Autowired
     public FetchPaymentStatusService(PaymentRepository paymentRepository) {
         this.paymentRepository = paymentRepository;
     }
