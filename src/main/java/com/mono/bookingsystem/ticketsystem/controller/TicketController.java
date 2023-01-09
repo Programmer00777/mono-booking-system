@@ -1,5 +1,6 @@
 package com.mono.bookingsystem.ticketsystem.controller;
 
+import com.mono.bookingsystem.ticketsystem.dto.TicketStatusInfoDto;
 import com.mono.bookingsystem.ticketsystem.service.TicketInfoService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class TicketController {
     }
 
     @GetMapping(path = "/info/{ticketId}")
-    public String getTicketInfo(@PathVariable("ticketId") String id, HttpServletRequest request) {
+    public TicketStatusInfoDto getTicketInfo(@PathVariable("ticketId") String id, HttpServletRequest request) {
         return ticketInfoService.getTicketInfo(UUID.fromString(id), request);
     }
 }
