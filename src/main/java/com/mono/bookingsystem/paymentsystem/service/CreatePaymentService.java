@@ -1,6 +1,7 @@
 package com.mono.bookingsystem.paymentsystem.service;
 
 import com.mono.bookingsystem.paymentsystem.entity.Payment;
+import com.mono.bookingsystem.paymentsystem.exception.InvalidPaymentException;
 import com.mono.bookingsystem.paymentsystem.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,15 +24,25 @@ public class CreatePaymentService {
         this.paymentRepository = paymentRepository;
     }
 
+    public UUID createPayment(Payment payment) {
+        areArgumentsValid(payment.getFullName(), payment.getAmount());
+        return paymentRepository.save(payment).getId();
+    }
+
     public UUID createPayment(String fullName, Double amount) {
-        if (fullName == null || amount == null) {
-            throw new IllegalArgumentException("Both fullName and amount must be provided");
-        }
-        if (amount < 0.0) {
-            throw new IllegalArgumentException("The amount cannot be less than 0");
-        }
+        areArgumentsValid(fullName, amount);
         Payment payment = new Payment(fullName, amount);
         paymentRepository.save(payment);
         return payment.getId();
+    }
+
+    private boolean areArgumentsValid(String fullName, Double amount) {
+        if (fullName == null || amount == null) {
+            throw new InvalidPaymentException("Both fullName and amount must be provided");
+        }
+        if (amount < 0.0) {
+            throw new InvalidPaymentException("The amount cannot be less than 0");
+        }
+        return true;
     }
 }

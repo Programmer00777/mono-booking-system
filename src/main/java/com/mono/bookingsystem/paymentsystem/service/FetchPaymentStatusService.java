@@ -7,7 +7,9 @@ import com.mono.bookingsystem.paymentsystem.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Accepts: unique payment ID
@@ -25,11 +27,20 @@ public class FetchPaymentStatusService {
         this.paymentRepository = paymentRepository;
     }
 
-    public Status fetchStatus(UUID paymentId) {
+    public Status fetchStatusWithId(UUID paymentId) {
         Payment payment = paymentRepository.findById(paymentId).orElse(null);
         if (payment == null) throw new PaymentNotFoundException("Payment with ID " + paymentId + " not found");
         else {
             return payment.getStatus();
+        }
+    }
+
+    public List<Status> fetchStatusList() {
+        List<Status> statusList = paymentRepository.findAll().stream().map(Payment::getStatus).toList();
+        if (statusList.size() == 0) {
+            throw new PaymentNotFoundException("There are no payments in the system");
+        } else {
+            return statusList;
         }
     }
 }
