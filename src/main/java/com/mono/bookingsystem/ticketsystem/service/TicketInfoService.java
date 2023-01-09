@@ -4,6 +4,7 @@ import com.mono.bookingsystem.ticketsystem.entity.Ticket;
 import com.mono.bookingsystem.ticketsystem.exception.TicketNotFoundException;
 import com.mono.bookingsystem.ticketsystem.repository.TicketRepository;
 import com.mono.bookingsystem.ticketsystem.repository.TripRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class TicketInfoService {
 
     private final TicketRepository ticketRepository;
     private final TripRepository tripRepository;
-    @Value("mono.paymentsystem.status.uri")
+    @Value("${mono.paymentsystem.status.uri}")
     private String generalPaymentStatusUri;
 
     @Autowired
@@ -31,7 +32,7 @@ public class TicketInfoService {
         this.tripRepository = tripRepository;
     }
 
-    public String getTicketInfo(UUID ticketId) {
+    public String getTicketInfo(UUID ticketId, HttpServletRequest request) {
         if (ticketId == null) {
             throw new IllegalArgumentException("Ticket ID must be provided");
         }
@@ -39,7 +40,10 @@ public class TicketInfoService {
         if (ticket == null) {
             throw new TicketNotFoundException("Ticket with ID " + ticketId + " not found");
         } else {
-            String uri = generalPaymentStatusUri + ticket.getPaymentId();
+            System.out.println("===== " + generalPaymentStatusUri);
+            String uri = request.getRequestURL()
+                                .substring(0, request.getRequestURL().indexOf(request.getRequestURI()))
+                                + generalPaymentStatusUri + ticket.getPaymentId();
             RestTemplate template = new RestTemplate();
             String fetchedStatus = template.getForObject(uri, String.class);
 

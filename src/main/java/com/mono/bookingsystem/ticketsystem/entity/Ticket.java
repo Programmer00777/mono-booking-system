@@ -1,6 +1,7 @@
 package com.mono.bookingsystem.ticketsystem.entity;
 
 import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
