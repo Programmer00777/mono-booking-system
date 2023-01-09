@@ -24,6 +24,11 @@ public class Ticket {
         this.paymentId = paymentId;
     }
 
+    public Ticket(String fullName, UUID tripId) {
+        this.fullName = fullName;
+        this.tripId = tripId;
+    }
+
     public UUID getId() {
         return id;
     }

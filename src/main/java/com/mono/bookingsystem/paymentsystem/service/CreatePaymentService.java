@@ -36,13 +36,12 @@ public class CreatePaymentService {
         return payment.getId();
     }
 
-    private boolean areArgumentsValid(String fullName, Double amount) {
+    private void areArgumentsValid(String fullName, Double amount) {
         if (fullName == null || amount == null) {
             throw new InvalidPaymentException("Both fullName and amount must be provided");
         }
         if (amount < 0.0) {
             throw new InvalidPaymentException("The amount cannot be less than 0");
         }
-        return true;
     }
 }
