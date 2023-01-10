@@ -15,6 +15,7 @@ public class Payment {
     private String fullName;
     private Double amount;
     private Status status = Status.NEW;
+    private boolean processed = false;
 
     public Payment() {}
 
@@ -59,6 +60,14 @@ public class Payment {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
     }
 
     @Override
