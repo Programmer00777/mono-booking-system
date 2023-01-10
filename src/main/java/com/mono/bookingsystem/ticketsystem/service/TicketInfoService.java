@@ -30,7 +30,7 @@ public class TicketInfoService {
     private final TripRepository tripRepository;
     @Value("${mono.paymentsystem.status.uri}")
     private String generalPaymentStatusUri;
-    private RestTemplate template = new RestTemplate();
+    private final RestTemplate template = new RestTemplate();
 
     @Autowired
     public TicketInfoService(TicketRepository ticketRepository, TripRepository tripRepository) {
@@ -48,13 +48,13 @@ public class TicketInfoService {
         } else {
             String fetchedStatus = fetchPaymentStatus(ticket, request);
             Trip trip = fetchTripInfo(ticket.getTripId().toString());
-            return new TicketInfoDto(trip, fetchedStatus);
+            return new TicketInfoDto(ticket.getId(), trip, fetchedStatus);
         }
     }
 
     public List<TicketInfoDto> getTicketInfoList(HttpServletRequest request) {
         List<TicketInfoDto> ticketInfoDtos = ticketRepository.findAll().stream()
-                .map(ticket -> new TicketInfoDto(fetchTripInfo(ticket.getTripId().toString()),
+                .map(ticket -> new TicketInfoDto(ticket.getId(), fetchTripInfo(ticket.getTripId().toString()),
                                                  fetchPaymentStatus(ticket, request))).toList();
 
         if (ticketInfoDtos.size() == 0) {
