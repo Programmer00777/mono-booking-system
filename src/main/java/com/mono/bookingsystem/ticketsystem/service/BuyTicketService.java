@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * Accepts: Full name, trip ID
  * Returns: Ticket ID
- *
+ * <p>
  * Communicates with: {@link com.mono.bookingsystem.paymentsystem.service.CreatePaymentService}
  */
 @Service
@@ -29,7 +29,7 @@ public class BuyTicketService {
     private final TripRepository tripRepository;
     @Value("${mono.paymentsystem.request.uri}")
     private String generalPaymentRequestUri;
-    private RestTemplate template = new RestTemplate();
+    private final RestTemplate template = new RestTemplate();
 
     @Autowired
     public BuyTicketService(TicketRepository ticketRepository, TripRepository tripRepository) {

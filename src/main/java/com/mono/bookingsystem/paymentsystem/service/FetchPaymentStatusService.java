@@ -2,7 +2,6 @@ package com.mono.bookingsystem.paymentsystem.service;
 
 import com.mono.bookingsystem.paymentsystem.dto.PaymentStatusDto;
 import com.mono.bookingsystem.paymentsystem.entity.Payment;
-import com.mono.bookingsystem.paymentsystem.entity.Status;
 import com.mono.bookingsystem.paymentsystem.exception.PaymentNotFoundException;
 import com.mono.bookingsystem.paymentsystem.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +9,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Accepts: unique payment ID
  * Returns: NEW/FAILED/DONE status (random)
- *
+ * <p>
  * Communicates with: {@link com.mono.bookingsystem.ticketsystem.service.TicketInfoService}
  */
 @Service

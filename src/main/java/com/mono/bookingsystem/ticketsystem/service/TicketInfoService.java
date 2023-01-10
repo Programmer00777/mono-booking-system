@@ -20,7 +20,7 @@ import java.util.UUID;
 /**
  * Accepts: Ticket ID
  * Returns: Trip info, payment status
- *
+ * <p>
  * Communicates with: {@link com.mono.bookingsystem.paymentsystem.service.FetchPaymentStatusService}
  */
 @Service
