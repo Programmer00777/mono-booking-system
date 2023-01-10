@@ -3,7 +3,6 @@ package com.mono.bookingsystem.paymentsystem.controller;
 import com.mono.bookingsystem.paymentsystem.dto.PaymentStatusDto;
 import com.mono.bookingsystem.paymentsystem.entity.Payment;
 import com.mono.bookingsystem.paymentsystem.entity.PaymentStatusDtoModelAssembler;
-import com.mono.bookingsystem.paymentsystem.entity.Status;
 import com.mono.bookingsystem.paymentsystem.exception.InvalidPaymentException;
 import com.mono.bookingsystem.paymentsystem.service.CreatePaymentService;
 import com.mono.bookingsystem.paymentsystem.service.FetchPaymentStatusService;
@@ -37,26 +36,16 @@ public class PaymentController {
 
     @GetMapping(path = "/status/all")
     public CollectionModel<EntityModel<PaymentStatusDto>> getPaymentStatusList() {
-//        List<EntityModel<PaymentStatusDto>> statusList = fetchPaymentStatusService.fetchPaymentList()
-//                .stream().map(paymentStatusDtoEntry ->
-//                        paymentStatusDtoModelAssembler
-//                                .toModel(paymentStatusDtoEntry, paymentStatusDtoEntry.getPaymentId())).toList();
-//
-//        return CollectionModel
-//                .of(statusList, linkTo(methodOn(PaymentController.class).getPaymentStatusList()).withSelfRel());
-        return null;
+        List<EntityModel<PaymentStatusDto>> paymentList = fetchPaymentStatusService.fetchPaymentList()
+                .stream().map(paymentStatusDtoModelAssembler::toModel).toList();
+
+        return CollectionModel
+                .of(paymentList, linkTo(methodOn(PaymentController.class).getPaymentStatusList()).withSelfRel());
     }
 
-
-//    @GetMapping(path = "/status/{paymentId}")
-//    public EntityModel<PaymentStatusDto> getPaymentStatusById(@PathVariable("paymentId") String id) {
-//        PaymentStatusDto paymentStatusDto = fetchPaymentStatusService.fetchStatusWithId(UUID.fromString(id));
-//        return paymentStatusDtoModelAssembler.toModel(paymentStatusDto, UUID.fromString(id));
-//    }
-
     @GetMapping(path = "/status/{paymentId}")
-    public Status getPaymentStatusById(@PathVariable("paymentId") String id) {
-        return fetchPaymentStatusService.fetchStatusWithId(UUID.fromString(id));
+    public EntityModel<PaymentStatusDto> getPaymentStatusById(@PathVariable("paymentId") UUID id) {
+        return paymentStatusDtoModelAssembler.toModel(fetchPaymentStatusService.fetchStatusWithId(id));
     }
 
     @PostMapping(path = "/create")

@@ -3,19 +3,20 @@ package com.mono.bookingsystem.paymentsystem.entity;
 import com.mono.bookingsystem.paymentsystem.controller.PaymentController;
 import com.mono.bookingsystem.paymentsystem.dto.PaymentStatusDto;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
-public class PaymentStatusDtoModelAssembler {
+public class PaymentStatusDtoModelAssembler
+implements RepresentationModelAssembler<PaymentStatusDto, EntityModel<PaymentStatusDto>> {
 
-    public EntityModel<PaymentStatusDto> toModel(PaymentStatusDto paymentStatusDto, UUID paymentId) {
+    @Override
+    public EntityModel<PaymentStatusDto> toModel(PaymentStatusDto paymentStatusDto) {
         return EntityModel.of(paymentStatusDto,
-                linkTo(methodOn(PaymentController.class).getPaymentStatusById(paymentId.toString())).withSelfRel(),
-                linkTo(methodOn(PaymentController.class).getPaymentStatusList()).withRel("paymentStatusList"));
+                linkTo(methodOn(PaymentController.class).getPaymentStatusById(paymentStatusDto.getPaymentId())).withSelfRel(),
+                linkTo(methodOn(PaymentController.class).getPaymentStatusList()).withSelfRel());
     }
 }

@@ -26,7 +26,7 @@ public class PaymentStatusUpdateScheduledProcessor {
 
     @Scheduled(fixedDelay = 3500)
     public void updatePaymentStatuses() {
-        List<Payment> paymentList = fetchPaymentStatusService.fetchPaymentList();
+        List<Payment> paymentList = fetchPaymentStatusService.getAllPayments();
         if (paymentList.size() > 0) {
             paymentList.forEach(payment -> {
                 if (payment.getStatus().toString().equals("NEW")) {

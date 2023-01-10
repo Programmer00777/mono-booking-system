@@ -1,5 +1,6 @@
 package com.mono.bookingsystem.paymentsystem.service;
 
+import com.mono.bookingsystem.paymentsystem.dto.PaymentStatusDto;
 import com.mono.bookingsystem.paymentsystem.entity.Payment;
 import com.mono.bookingsystem.paymentsystem.entity.Status;
 import com.mono.bookingsystem.paymentsystem.exception.PaymentNotFoundException;
@@ -26,20 +27,21 @@ public class FetchPaymentStatusService {
         this.paymentRepository = paymentRepository;
     }
 
-    public Status fetchStatusWithId(UUID paymentId) {
-        Payment payment = paymentRepository.findById(paymentId).orElse(null);
-        if (payment == null) throw new PaymentNotFoundException("Payment with ID " + paymentId + " not found");
-        else {
-            return payment.getStatus();
-        }
+    public PaymentStatusDto fetchStatusWithId(UUID paymentId) {
+        Payment payment = paymentRepository.findById(paymentId)
+                .orElseThrow(() -> new PaymentNotFoundException("Payment with ID " + paymentId + " not found"));
+        return new PaymentStatusDto(payment.getId(), payment.getStatus());
+
     }
 
-    public List<Payment> fetchPaymentList() {
-        List<Payment> statusList = paymentRepository.findAll();
-        if (statusList.size() == 0) {
+    public List<PaymentStatusDto> fetchPaymentList() {
+        List<PaymentStatusDto> paymentStatusDtoList = paymentRepository.findAll().stream()
+                .map(payment -> new PaymentStatusDto(payment.getId(), payment.getStatus())).toList();
+
+        if (paymentStatusDtoList.size() == 0) {
             throw new PaymentNotFoundException("There are no payments in the system");
         } else {
-            return statusList;
+            return paymentStatusDtoList;
         }
     }
 
@@ -48,5 +50,14 @@ public class FetchPaymentStatusService {
                 .orElseThrow(() -> new PaymentNotFoundException("Payment with ID " + paymentId + " not found"));
         payment.setStatus(Status.randomStatus());
         paymentRepository.save(payment);
+    }
+
+    public List<Payment> getAllPayments() {
+        List<Payment> paymentList = paymentRepository.findAll();
+        if (paymentList.size() == 0) {
+            throw new PaymentNotFoundException("There are no payments in the system");
+        } else {
+            return paymentList;
+        }
     }
 }

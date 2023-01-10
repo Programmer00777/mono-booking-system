@@ -5,6 +5,7 @@ import com.mono.bookingsystem.paymentsystem.entity.Status;
 import java.util.UUID;
 
 public class PaymentStatusDto {
+
     private UUID paymentId;
     private Status status;
 

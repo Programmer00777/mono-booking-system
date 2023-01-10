@@ -1,6 +1,5 @@
 package com.mono.bookingsystem.ticketsystem.service;
 
-import com.mono.bookingsystem.paymentsystem.dto.PaymentStatusDto;
 import com.mono.bookingsystem.ticketsystem.dto.TicketInfoDto;
 import com.mono.bookingsystem.ticketsystem.entity.Ticket;
 import com.mono.bookingsystem.ticketsystem.entity.Trip;
@@ -11,7 +10,6 @@ import com.mono.bookingsystem.ticketsystem.repository.TripRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 

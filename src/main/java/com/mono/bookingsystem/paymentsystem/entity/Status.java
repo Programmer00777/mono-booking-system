@@ -4,19 +4,9 @@ import java.util.List;
 import java.util.Random;
 
 public enum Status {
-    NEW("N"),
-    FAILED("F"),
-    DONE("D");
-
-    private String statusCode;
-
-    private Status(String statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    public String getStatusCode() {
-        return statusCode;
-    }
+    NEW,
+    FAILED,
+    DONE;
 
     private static final List<Status> STATUS_LIST = List.of(values());
     private static final int SIZE = STATUS_LIST.size();
