@@ -9,6 +9,9 @@ public class PaymentStatusDto {
     private UUID paymentId;
     private Status status;
 
+    public PaymentStatusDto() {
+    }
+
     public PaymentStatusDto(UUID paymentId, Status status) {
         this.paymentId = paymentId;
         this.status = status;

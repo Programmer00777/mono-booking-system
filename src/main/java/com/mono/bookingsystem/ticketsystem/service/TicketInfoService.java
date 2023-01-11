@@ -1,5 +1,6 @@
 package com.mono.bookingsystem.ticketsystem.service;
 
+import com.mono.bookingsystem.paymentsystem.dto.PaymentStatusDto;
 import com.mono.bookingsystem.ticketsystem.dto.TicketInfoDto;
 import com.mono.bookingsystem.ticketsystem.entity.Ticket;
 import com.mono.bookingsystem.ticketsystem.entity.Trip;
@@ -68,7 +69,7 @@ public class TicketInfoService {
         String uri = request.getRequestURL()
                 .substring(0, request.getRequestURL().indexOf(request.getRequestURI()))
                 + generalPaymentStatusUri + ticket.getPaymentId();
-        return template.getForObject(uri, String.class);
+        return template.getForObject(uri, PaymentStatusDto.class).getStatus().toString();
     }
 
     private Trip fetchTripInfo(String tripId) {
