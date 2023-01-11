@@ -39,10 +39,13 @@ public class LoadDatabase {
         Trip trip3 = new Trip("Odesa", "Mykolaiv",
                 LocalDateTime.of(2022, 2, 4, 15, 45, 0),
                 500.0, 37);
+        Trip trip4 = new Trip("Poltava", "Sumy",
+                LocalDateTime.of(2022, 2, 4, 12, 15, 0),
+                375.0, 0);
 
         return args -> {
             paymentRepository.saveAll(Arrays.asList(payment1, payment2, payment3));
-            tripRepository.saveAll(Arrays.asList(trip1, trip2, trip3));
+            tripRepository.saveAll(Arrays.asList(trip1, trip2, trip3, trip4));
 
             Ticket ticket1 = new Ticket("Sergey Chernikov", trip1.getId(), payment1.getId());
             Ticket ticket2 = new Ticket("John Doe", trip2.getId(), payment2.getId());

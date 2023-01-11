@@ -78,7 +78,7 @@ public class TicketInfoService {
         String uri = request.getRequestURL()
                 .substring(0, request.getRequestURL().indexOf(request.getRequestURI()))
                 + generalPaymentStatusUri + ticket.getPaymentId();
-        return template.getForObject(uri, PaymentStatusDto.class).getStatus().toString();
+        return template.getForObject(uri, PaymentStatusDto.class).status().toString();
     }
 
     private Trip fetchTripInfo(String tripId) {

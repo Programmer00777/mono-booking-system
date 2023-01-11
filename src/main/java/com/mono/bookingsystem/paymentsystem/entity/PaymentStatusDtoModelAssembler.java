@@ -16,7 +16,7 @@ implements RepresentationModelAssembler<PaymentStatusDto, EntityModel<PaymentSta
     @Override
     public EntityModel<PaymentStatusDto> toModel(PaymentStatusDto paymentStatusDto) {
         return EntityModel.of(paymentStatusDto,
-                linkTo(methodOn(PaymentController.class).getPaymentStatusById(paymentStatusDto.getPaymentId())).withSelfRel(),
+                linkTo(methodOn(PaymentController.class).getPaymentStatusById(paymentStatusDto.paymentId())).withSelfRel(),
                 linkTo(methodOn(PaymentController.class).getPaymentStatusList()).withRel("paymentStatusList"));
     }
 }

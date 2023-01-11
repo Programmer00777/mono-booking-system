@@ -32,24 +32,12 @@ public class Ticket {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
     public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public UUID getTripId() {
         return tripId;
-    }
-
-    public void setTripId(UUID tripId) {
-        this.tripId = tripId;
     }
 
     public UUID getPaymentId() {

@@ -37,16 +37,8 @@ public class Trip {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
     public String getFromPlace() {
         return fromPlace;
-    }
-
-    public void setFromPlace(String from) {
-        this.fromPlace = from;
     }
 
     public String getToPlace() {
@@ -61,16 +53,8 @@ public class Trip {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
     public Double getPrice() {
         return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     public Integer getAvailable() {

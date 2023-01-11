@@ -5,14 +5,9 @@ import com.mono.bookingsystem.ticketsystem.entity.Trip;
 import java.util.UUID;
 
 public class TicketInfoDto {
-    private UUID ticketId;
-    private Trip trip;
-    private String status;
-
-    public TicketInfoDto(Trip trip, String status) {
-        this.trip = trip;
-        this.status = status;
-    }
+    private final UUID ticketId;
+    private final Trip trip;
+    private final String status;
 
     public TicketInfoDto(UUID ticketId, Trip trip, String status) {
         this.ticketId = ticketId;

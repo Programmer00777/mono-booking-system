@@ -10,6 +10,6 @@ import java.util.UUID;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, UUID> {
-//    @Query("select t from Ticket t where t.paymentId = ?")
+
     public Optional<Ticket> findByPaymentId(UUID paymentId);
 }

@@ -2,9 +2,6 @@ package com.mono.bookingsystem.paymentsystem.controller;
 
 import com.mono.bookingsystem.paymentsystem.exception.InvalidPaymentException;
 import com.mono.bookingsystem.paymentsystem.exception.PaymentNotFoundException;
-import com.mono.bookingsystem.ticketsystem.exception.NoTicketsAvailableException;
-import com.mono.bookingsystem.ticketsystem.exception.TicketNotFoundException;
-import com.mono.bookingsystem.ticketsystem.exception.TripNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

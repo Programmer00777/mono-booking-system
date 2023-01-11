@@ -3,18 +3,12 @@ package com.mono.bookingsystem.ticketsystem.controller;
 import com.mono.bookingsystem.ticketsystem.dto.TicketDtoModelAssembler;
 import com.mono.bookingsystem.ticketsystem.dto.TicketInfoDto;
 import com.mono.bookingsystem.ticketsystem.entity.Ticket;
-import com.mono.bookingsystem.ticketsystem.entity.Trip;
-import com.mono.bookingsystem.ticketsystem.exception.NoTicketsAvailableException;
-import com.mono.bookingsystem.ticketsystem.exception.TicketNotFoundException;
-import com.mono.bookingsystem.ticketsystem.exception.TripNotFoundException;
 import com.mono.bookingsystem.ticketsystem.service.BuyTicketService;
 import com.mono.bookingsystem.ticketsystem.service.TicketInfoService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
