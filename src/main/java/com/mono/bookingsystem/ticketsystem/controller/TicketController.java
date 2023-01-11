@@ -3,6 +3,7 @@ package com.mono.bookingsystem.ticketsystem.controller;
 import com.mono.bookingsystem.ticketsystem.dto.TicketDtoModelAssembler;
 import com.mono.bookingsystem.ticketsystem.dto.TicketInfoDto;
 import com.mono.bookingsystem.ticketsystem.entity.Ticket;
+import com.mono.bookingsystem.ticketsystem.entity.Trip;
 import com.mono.bookingsystem.ticketsystem.exception.NoTicketsAvailableException;
 import com.mono.bookingsystem.ticketsystem.exception.TicketNotFoundException;
 import com.mono.bookingsystem.ticketsystem.exception.TripNotFoundException;

@@ -32,7 +32,7 @@ public class LoadDatabase {
 
         Trip trip1 = new Trip("Dnipro", "Kharkiv",
                 LocalDateTime.of(2022, 1, 14, 11, 0, 0),
-                600.45, 0);
+                600.45, 40);
         Trip trip2 = new Trip("Kiyv", "Zhytomyr",
                 LocalDateTime.of(2022, 1, 15, 9, 30, 0),
                 400.0, 31);
