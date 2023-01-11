@@ -6,8 +6,10 @@ import com.mono.bookingsystem.paymentsystem.service.FetchPaymentStatusService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -17,6 +19,9 @@ public class PaymentStatusUpdateScheduledProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(PaymentStatusUpdateScheduledProcessor.class);
     private final FetchPaymentStatusService fetchPaymentStatusService;
     private final PaymentRepository paymentRepository;
+    private final RestTemplate template = new RestTemplate();
+    @Value("${mono.ticketsystem.available.update.uri}")
+    private String generalAvailableUpdateURI;
 
     @Autowired
     public PaymentStatusUpdateScheduledProcessor(FetchPaymentStatusService fetchPaymentStatusService, PaymentRepository paymentRepository) {
@@ -35,6 +40,7 @@ public class PaymentStatusUpdateScheduledProcessor {
                     LOGGER.warn("Payment with ID " + payment.getId() + " failed.");
                     payment.setProcessed(true);
                     paymentRepository.save(payment);
+                    template.put(generalAvailableUpdateURI + payment.getId(), null);
                 } else if (!payment.isProcessed()) {
                     LOGGER.info("Payment with ID " + payment.getId() + " done.");
                     payment.setProcessed(true);

@@ -65,6 +65,15 @@ public class TicketInfoService {
         }
     }
 
+    public void updateTripAvailable(UUID paymentId) {
+        Ticket ticket = ticketRepository.findByPaymentId(paymentId)
+                .orElseThrow(() -> new TicketNotFoundException("No ticket with payment ID " + paymentId + " found"));
+        Trip trip = tripRepository.findById(ticket.getTripId())
+                .orElseThrow(() -> new TripNotFoundException("No trip with ID " + ticket.getTripId() + " found"));
+        trip.setAvailable(trip.getAvailable() + 1);
+        tripRepository.save(trip);
+    }
+
     private String fetchPaymentStatus(Ticket ticket, HttpServletRequest request) {
         String uri = request.getRequestURL()
                 .substring(0, request.getRequestURL().indexOf(request.getRequestURI()))

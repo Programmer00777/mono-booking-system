@@ -53,4 +53,9 @@ public class TicketController {
     public UUID buyTicketAndPay(@RequestBody Ticket ticket, HttpServletRequest request) {
         return buyTicketService.buyTicketAndRequestPayment(ticket, request);
     }
+
+    @PutMapping(path = "/available/update/{tripId}")
+    public void updateAvailable(@PathVariable("tripId") UUID paymentId) {
+        ticketInfoService.updateTripAvailable(paymentId);
+    }
 }
