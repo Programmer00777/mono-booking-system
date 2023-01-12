@@ -1,7 +1,6 @@
-package com.mono.bookingsystem.paymentsystem.entity;
+package com.mono.bookingsystem.paymentsystem.dto;
 
 import com.mono.bookingsystem.paymentsystem.controller.PaymentController;
-import com.mono.bookingsystem.paymentsystem.dto.PaymentStatusDto;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;

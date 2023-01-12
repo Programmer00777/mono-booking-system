@@ -2,7 +2,7 @@ package com.mono.bookingsystem.paymentsystem.controller;
 
 import com.mono.bookingsystem.paymentsystem.dto.PaymentStatusDto;
 import com.mono.bookingsystem.paymentsystem.entity.Payment;
-import com.mono.bookingsystem.paymentsystem.entity.PaymentStatusDtoModelAssembler;
+import com.mono.bookingsystem.paymentsystem.dto.PaymentStatusDtoModelAssembler;
 import com.mono.bookingsystem.paymentsystem.exception.InvalidPaymentException;
 import com.mono.bookingsystem.paymentsystem.service.CreatePaymentService;
 import com.mono.bookingsystem.paymentsystem.service.FetchPaymentStatusService;
@@ -57,7 +57,7 @@ public class PaymentController {
         }
     }
 
-     @PutMapping(path = "/status/update/{paymentId}")
+    @PutMapping(path = "/status/update/{paymentId}")
     public void updatePaymentStatusById(@PathVariable("paymentId") String paymentId) {
         fetchPaymentStatusService.updateStatusById(UUID.fromString(paymentId));
      }
